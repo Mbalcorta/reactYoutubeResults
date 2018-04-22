@@ -4,7 +4,8 @@ import YTSearch from 'youtube-api-search';
 import SearchBar from "./components/search_bar";
 import VideoList from './components/video_list';
 import VideoDetail from './components/video_detail'
-const API_KEY = "AIzaSyDUbHTORNvzPSmHoDB3UQi3b4N-s2X4J_A";
+import keys  from '../config/key'
+
 
 
 // create a new component. This component shoudl produce some html
@@ -21,7 +22,7 @@ class App extends Component {
     }
 
     videoSearch(term) {
-        return YTSearch({key: API_KEY, term: term}, (videos) => {
+        return YTSearch({key: keys.API_KEY, term: term}, (videos) => {
             this.setState({ 
                 videos: videos,
                 selectedVideo: videos[0]
@@ -32,7 +33,7 @@ class App extends Component {
     render () {
         return (
             <div>
-                <SearchBar onSearchTermChange={ (term) => this.videoSearch(term)} />
+                <SearchBar onSearchTermChange={ term => this.videoSearch(term)} />
                 <VideoDetail video={this.state.selectedVideo}/>
                 <VideoList 
                     onVideoSelect = { selectedVideo => this.setState({selectedVideo})}
